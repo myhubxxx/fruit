@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="User">
+	
+	<typeAlias alias="User" type="cn.fruit.domain.User"/>
+	
+	<insert id="insertUser" parameterClass="User">
+		insert into f_user(uid,   unumber,    upass,   uname,   udate,  address)
+					values(#uid#, #unumber# , #upass#, #uname#, #udate#, #address#)
+	</insert>
+	
+	<delete id="deleteByOrder" parameterClass="int">
+		delete from f_user where sortorder = #order#
+	</delete>
+	<delete id="deleteById" parameterClass="String">
+		delete from f_user where uid = #id#
+	</delete>
+	
+	<update id="updateByOrder" parameterClass="User">
+		update f_user set
+		unumber = #unumber#,
+		upass  = #upass#,
+		uname  = #uname#,
+		address = #address#
+		where sortorder = #sortorder#
+	</update>
+	<update id="updateById" parameterClass="User">
+		update f_user set
+		unumber = #unumber#,
+		upass  = #upass#,
+		uname  = #uname#,
+		address = #address#
+		where uid = #uid#
+	</update>
+	
+	<select id="getById" parameterClass="String"
+		resultClass="User">
+		select * from f_user where uid =  #uid#
+	</select>
+	<select id="getByOrder" parameterClass="int"
+		resultClass="User">
+		select * from f_user where sortorder =  #sortorder#
+	</select>
+	<select id="getByNumber" parameterClass="String"
+		resultClass="User">
+		select * from f_user where	unumber = #unumber#
+	</select>
+	
+	<select id="getAllCount" parameterClass="String"
+		resultClass="int">
+		select count(*) from f_user 
+	
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</select>
+	<!-- attr: attrUrl must be the type of 'a'='a' and xxx=kkk -->
+	<select id="getCurrentPage" parameterClass="HashMap"
+		resultClass="User">
+		select * from f_user
+		
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		
+		order by sortorder desc 
+		limit #lose#,#pageSize#
+	</select>
+
+</sqlMap>    

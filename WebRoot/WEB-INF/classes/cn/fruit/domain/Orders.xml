@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Orders">
+	
+	<typeAlias alias="Orders" type="cn.fruit.domain.Orders"/>
+	
+	<resultMap id="get-user-fruit" class="Orders">
+		<result property="oid" column="oid"/>
+		<result property="odate" column="odate"/>
+		<result property="number" column="number"/>
+		<result property="status" column="status"/>
+		<result property="sortorder" column="sortorder"/>
+		<result property="user" column="uid" select="User.getById"/>
+		<result property="fruit" column="fid" select="Fruit.getById"/>
+	</resultMap>
+	
+	<insert id="insertOrders" parameterClass="Orders">
+		insert into f_orders(oid,  odate,       uid, 		fid,  number , status)
+					values(	#oid#,#odate#,#user.uid#,#fruit.fid#,#number#,#status#)
+	</insert>
+	
+	<delete id="deleteById" parameterClass="String">
+		delete from f_orders where oid = #oid#
+	</delete>
+	<delete id="deleteByOrder" parameterClass="int">
+		delete from f_orders where sortorder = #sortorder#
+	</delete>
+	
+	<update id="updateById" parameterClass="Orders">
+		update f_orders set
+		fid = #fruit.fid#,
+		uid = #user.uid#,
+		number = #number#
+		
+		<dynamic>
+			<isNotNull property="status">
+					,status = #status#    
+			</isNotNull>
+		</dynamic>
+		
+		where oid = #oid#
+	</update>
+	<update id="updateByOrder" parameterClass="Orders">
+		update f_orders set
+		fid = #fruit.fid#,
+		uid = #user.uid#,
+		number = #number#
+		
+		<dynamic>
+			<isNotNull property="status">
+					,status = #status#    
+			</isNotNull>
+		</dynamic>
+		
+		where sortorder = #sortorder#
+	</update>
+	
+	<select id="getById" resultMap="get-user-fruit">
+		select * from 
+		f_orders 
+		where oid = #oid#
+	</select>
+	<select id="getByOrder" resultMap="get-user-fruit">
+		select * from 
+		f_orders
+		where sortorder = #sortorder#
+	</select>
+	
+	<select id="getAllCount" parameterClass="String"
+		resultClass="int">
+		select count(*) from f_orders
+	
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getCurrentPage" parameterClass="HashMap"
+		resultMap="get-user-fruit">
+		select * from f_orders
+		
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		
+		order by sortorder desc 
+		limit #lose#,#pageSize#
+	</select>
+	
+
+</sqlMap>    
+    

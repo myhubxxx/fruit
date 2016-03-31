@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+
+	<package name="fruit" namespace="/" extends="struts-default">
+	
+		<action name="fruit_*" class="cn.fruit.action.FruitAction" method="{1}">
+			<result name="success">Sg.jsp</result>
+		</action>
+		
+		<action name="addFruit" class="cn.fruit.action.FruitAction" method="addFruit">
+			<result name="success">index.jsp</result>
+			<result name="input">fruit/addFruit.jsp</result>
+		</action>
+	
+		
+		
+	</package>
+
+
+</struts>	

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+    
+<sqlMap namespace="Fruit">
+	
+	 <typeAlias alias="Fruit" type="cn.fruit.domain.Fruit"/>
+	 
+	 <insert id="insertFruit" parameterClass="Fruit">
+	 	insert into f_fruit(fid,   fname,   fprice,   famount,  fpicture,  fdate,  place,  produceaddress)
+	 				values(#fid#, #fname#, #fprice#, #famount#,#fpicture#,#fdate#,#place#,#produceaddress#) 
+	 </insert>
+	
+	<delete id="deleteById" parameterClass="String">
+		delete from f_fruit where fid = #fid#
+	</delete>
+	<delete id="deleteByOrder" parameterClass="int">
+		delete from f_fruit where sortorder = #sortorder#
+	</delete>
+	
+	<update id="updateById" parameterClass="Fruit">
+		update f_fruit set
+		fname = #fname#,
+		fprice = #fprice#,
+		famount = #famount#,
+		fpicture = #fpicture#,
+		place = #place#
+		
+		<dynamic>
+			<isNotNull property="produceaddress">
+				<isNotEmpty property="produceaddress">
+					,produceaddress = #produceaddress#    
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		
+		where fid = #fid#
+	</update>
+	<update id="updateByOrder" parameterClass="Fruit">
+		update f_fruit set
+		fname = #fname#,
+		fprice = #fprice#,
+		famount = #famount#,
+		fpicture = #fpicture#,
+		place = #place#
+		
+		<dynamic>
+			<isNotNull property="produceaddress">
+				<isNotEmpty property="produceaddress">
+					,produceaddress = #produceaddress#    
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		
+		where sortorder = #sortorder#
+	</update>
+	
+	<select id="getById" parameterClass="String"
+		resultClass="Fruit">
+		select * from f_fruit where fid = #fid#
+	</select>
+	<select id="getByOrder" parameterClass="int"
+		resultClass="Fruit">
+		select * from f_fruit where sortorder = #sortorder#
+	</select>
+
+	<select id="getAllCount" parameterClass="String"
+		resultClass="int">
+		select count(*) from f_fruit
+	
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+	</select>
+	<select id="getCurrentPage" parameterClass="HashMap"
+		resultClass="Fruit">
+		select * from f_fruit
+		
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="AND">
+				<isNotEmpty>
+					( $attrUrl$ )
+				</isNotEmpty>
+			</isNotNull>
+		</dynamic>
+		
+		order by sortorder desc 
+		limit #lose#,#pageSize#
+	</select>
+
+	
+
+</sqlMap>

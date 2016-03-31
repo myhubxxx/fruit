@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  
+  <typeAlias alias="Student" type="cn.zy.me.domain.Student"/>
+  
+    <typeAlias alias="Student2" type="cn.zy.me.domain.Student2"/>
+	
+	
+  <!-- Result maps describe the mapping between the columns returned
+       from a query, and the class properties.  A result map isn't
+       necessary if the columns (or aliases) match to the properties 
+       exactly. -->
+  <resultMap id="StudentResult" class="Student">
+    <result property="id" column="id"/>
+    <result property="name" column="name"/>
+    <result property="password" column="password"/>
+  </resultMap>
+
+<!-- 	<insert id="insertStudent" parameterClass="Student2">
+		
+		insert into student(id,name,password)
+		values			(#id#,#name#,#password#)
+	</insert>
+ -->
+	<insert id="insertStudentMap" parameterClass="java.util.Map">
+		
+		insert into student(id,name,password)
+		values			(#ids#,#nameh#,#passwordh#)
+	</insert>
+	
+	<insert id="insertStudentSequence" parameterClass="Student">
+		<selectKey keyProperty="id" resultClass="int"></selectKey>
+		insert into student(id,name,password)
+		values			(#id#,#name#,#password#)
+	</insert>
+	
+	<select id="selectAllStudent" resultClass="Student">
+		select * from student
+	</select>
+	
+	<select id="selectAllStudent2" resultClass="Student2">
+		select 
+		id as ids,
+		name as nameh,
+		password as passwordh
+		from student
+		where id = #id#
+	</select>
+	
+	<select id="selectAllStudent2Map" resultClass="hashmap">
+		select 
+		id as ids,
+		name as nameh,
+		password as passwordh
+		from student
+		where id = #id#
+	</select>
+	
+	<select id="getStudentById" 
+		parameterClass="int"
+		resultClass="Student">
+		select * from student 
+		where id = #id#
+	</select>
+	
+	<select id="getStudentByIdMap" 
+		parameterClass="int"
+		resultClass="java.util.TreeMap">
+		select * from student 
+		where id = #id#
+	</select>
+	
+	<delete id="deleteStudentById" parameterClass="int">
+		delete from student 
+		where student.id= #id#
+	</delete>
+
+	<update id="updateStudent" parameterClass="Student">
+		<![CDATA[
+			update student set
+			name = #name#,
+			password = #password#
+			where id = #id#
+		]]>
+	</update>
+	
+	<select id="selectStudentByName"
+		parameterClass="String"
+		resultClass="Student">
+		select * from student 
+		where name like '%$name$%'
+	</select>
+	
+
+</sqlMap>
