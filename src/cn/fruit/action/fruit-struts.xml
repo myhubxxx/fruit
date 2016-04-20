@@ -7,6 +7,12 @@
 
 	<package name="fruit" namespace="/" extends="struts-default">
 	
+		<interceptors>
+			<interceptor name="loginInterceptor" class="cn.fruit.interceptor.AccessInterceptor"></interceptor>
+		</interceptors>
+		
+		
+	
 		<action name="fruit_*" class="cn.fruit.action.FruitAction" method="{1}">
 			<result name="success">Sg.jsp</result>
 		</action>
@@ -16,6 +22,7 @@
 			<result name="input">fruit/addFruit.jsp</result>
 		</action>
 	
+		<action name="fruitJson" class="cn.fruit.action.FruitAction" method="writerToJson"></action>
 		
 		
 	</package>

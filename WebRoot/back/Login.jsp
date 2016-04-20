@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -51,22 +52,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="account-box"> 
-                        <form role="form" action="index.html">
+                        <s:form action="user_loginWeb.action">
                             <div class="form-group">
                                 <!--a href="#" class="pull-right label-forgot">Forgot email?</a-->
-                                <label for="inputUsernameEmail">用户名</label>
-                                <input type="text" id="inputUsernameEmail" class="form-control">
+                                <label for="inputUsernameEmail">用户名     &nbsp;&nbsp;${msg} </label>
+                                 <input type="text" id="inputUsernameEmail" class="form-control" name="unumber" value="${unumber }"/> 
+                              <%--   <s:textfield id="inputUsernameEmail" cssClass="form-control" name="unumber"/> --%>
                             </div>
                             <div class="form-group">
                                 <!--a href="#" class="pull-right label-forgot">Forgot password?</a-->
                                 <label for="inputPassword">密码</label>
-                                <input type="password" id="inputPassword" class="form-control">
+                                 <input type="password" id="inputPassword" class="form-control" name="upass" value="" />
+                             <%--    <s:password id="inputPassword" cssClass="form-control" name="upass" /> --%>
                             </div>
                             
                             <button class="btn btn btn-primary" type="submit">
                                 登 录
                             </button>
-                        </form>
+                        </s:form>
                         <a class="forgotLnk" href="index.html"></a>
                        
                         <div class="row-block">

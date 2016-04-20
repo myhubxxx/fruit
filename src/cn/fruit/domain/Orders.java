@@ -10,12 +10,28 @@ public class Orders {
 	private Integer sortorder;
 	private Integer status;
 	
+	// new add 
+	private String remark;
+	
 //	private String udi;
 //	private String fid;
 	private User user;
 	private Fruit fruit;
 	
 	
+	@Override
+	public String toString() {
+		return "Orders [oid=" + oid + ", odate=" + odate + ", number=" + number
+				+ ", sortorder=" + sortorder + ", status=" + status
+				+ ", remark=" + remark + ", user=" + user + ", fruit=" + fruit
+				+ "]";
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
 	public Integer getStatus() {
 		return status;
 	}
@@ -58,12 +74,7 @@ public class Orders {
 	public void setFruit(Fruit fruit) {
 		this.fruit = fruit;
 	}
-	@Override
-	public String toString() {
-		return "Orders [oid=" + oid + ", odate=" + odate + ", number=" + number
-				+ ", sortorder=" + sortorder + ", status=" + status + ", user="
-				+ user + ", fruit=" + fruit + "]";
-	}
+
 	
 	
 	

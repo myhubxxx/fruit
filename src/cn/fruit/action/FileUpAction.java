@@ -37,11 +37,11 @@ public class FileUpAction extends ActionSupport implements ModelDriven<FileUp>{
 		}
 		ServletActionContext.getRequest().getSession().setAttribute("realName", realName);
 //		System.out.println(path + File.separator + realName );
-
+//		new String().getClass(); Object
 		
 		return "toFruitAction";
 	}
 
-
+	  
 
 }

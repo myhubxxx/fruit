@@ -24,7 +24,7 @@ public class OrdersTest {
 	
 	@Test
 	public void indertTest() throws SQLException{
-		for (int i = 0; i < 20; i++) {
+//		for (int i = 0; i < 20; i++) {
 			
 		User u = new UserDaoImpl().getById("User.getById", "B523C5AEE64D48458EBD4C59A55C62F6");
 		Fruit f = new FruitDaoImpl().getById("Fruit.getById", "20609D8251F34190AD48B83961CFE182");
@@ -35,8 +35,10 @@ public class OrdersTest {
 			order.setOdate(new Date());
 			order.setOid(CommonUtils.uuid());
 			
-		dao.add("Orders.insertOrders", order);
-		}
+		Integer flag = dao.add("Orders.insertOrders", order);
+		if(null == flag) System.out.println( "null");
+		else{System.out.println("not null");}
+//		}
 	}
 	@Test
 	public void getById() throws SQLException{

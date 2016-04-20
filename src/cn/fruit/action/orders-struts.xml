@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+
+	
+
+	<package name="orders" namespace="/" extends="struts-default">
+		<interceptors>
+		
+			<interceptor name="loginInterceptor" class="cn.fruit.interceptor.AccessInterceptor"></interceptor>
+		
+		</interceptors>
+	
+		<action name="orders_*" class="cn.fruit.action.OrdersAction" method="{1}">
+		
+		
+				<!-- <interceptor-ref name="defaultStack"></interceptor-ref> 
+				<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
+		</action>
+		
+	
+	</package>
+
+
+</struts>	

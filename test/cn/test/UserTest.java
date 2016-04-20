@@ -18,17 +18,17 @@ public class UserTest {
 	UserDao dao = new UserDaoImpl();
 	@Test
 	public void addTest() throws SQLException{
-		for (int i = 0; i < 20; i++) {
+//		for (int i = 0; i < 20; i++) {
 			
 		User user = new User();
 			user.setUid(CommonUtils.uuid());
-			user.setUnumber("xyz");
-			user.setUpass("123");
+			user.setUnumber("張三");
+			user.setUpass("123sdfsdfsf");
 			user.setUname("ggg");
 			user.setUdate(new Date());
 			user.setAddress("西南石油大学");
 		dao.add("User.insertUser", user);
-		}
+//		}
 	}
 	@Test
 	public void updateOrderTest() throws SQLException{
@@ -91,7 +91,7 @@ public class UserTest {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("pageSize", 5);
 		map.put("lose", 5);
-		map.put("attrUrl", "address='西南石油大学' and unumber='xyz' and upass=123");
+		map.put("attrUrl", "address='西南石油大学'  and upass=123");
 		
 		List<User> users = dao.getCurrentPage("User.getCurrentPage", map);
 		for (User user : users) {

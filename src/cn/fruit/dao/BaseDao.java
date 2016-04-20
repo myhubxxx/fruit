@@ -8,7 +8,7 @@ import java.util.Map;
 
 public interface BaseDao<T> {
 	
-	public void add(String sql, T t)throws SQLException;
+	public int add(String sql, T t)throws SQLException;
 	
 	public void deleteByOrder(String sql, int order)throws SQLException;
 	

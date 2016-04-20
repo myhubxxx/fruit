@@ -8,5 +8,9 @@ public interface UserDao extends BaseDao<User>{
 	
 	
 	public User getByNumber(String number)throws SQLException;
+	
+	
+	
+	
 
 }

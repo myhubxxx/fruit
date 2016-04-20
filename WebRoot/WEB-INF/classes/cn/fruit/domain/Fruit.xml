@@ -85,7 +85,7 @@
 		<dynamic prepend="WHERE">
 			<isNotNull prepend="AND">
 				<isNotEmpty>
-					( $attrUrl$ )
+					 $attrUrl$ 
 				</isNotEmpty>
 			</isNotNull>
 		</dynamic>

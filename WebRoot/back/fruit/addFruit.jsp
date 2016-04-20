@@ -92,7 +92,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><a href="#"><i class="fa fa-laptop nav_icon"></i>用户管理<span
 							class="fa arrow"></span> </a>
 						<ul class="nav nav-second-level">
-							<li><a href="grids.html">增加用户</a>
+							<li><a href="${pageContext.request.contextPath}/back/addUser.jsp">增加用户</a>
 							</li>
 							<li><a href="grids.html">查看用户</a>
 							</li>
@@ -102,7 +102,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li><a href="#"><i class="fa fa-indent nav_icon"></i>产品管理<span
 							class="fa arrow"></span> </a>
 						<ul class="nav nav-second-level">
-							<li><a href="graphs.html">今日上线</a>
+							<li><a href="${pageContext.request.contextPath}/back/fruit/addFruit.jsp">添加产品</a>
 							</li>
 							<li><a href="typography.html">数据分析</a>
 							</li>

@@ -16,16 +16,18 @@ public class BaseDaoImpl<T> implements BaseDao<T> {
 	
 	
 	@Override
-	public void add(String sql, T t) throws SQLException {
-		
+	public int add(String sql, T t) throws SQLException {
+		int flag = 1;
 		try {
 
 			session.insert(sql, t);
 
 		} catch (Exception e) {
-
+			flag = 0;
 			e.printStackTrace();
 		}
+		
+		return flag;
 	}
 	@Deprecated
 	@Override

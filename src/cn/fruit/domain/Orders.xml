@@ -14,13 +14,14 @@
 		<result property="number" column="number"/>
 		<result property="status" column="status"/>
 		<result property="sortorder" column="sortorder"/>
+		<result property="remark" column="remark"/>
 		<result property="user" column="uid" select="User.getById"/>
 		<result property="fruit" column="fid" select="Fruit.getById"/>
 	</resultMap>
 	
 	<insert id="insertOrders" parameterClass="Orders">
-		insert into f_orders(oid,  odate,       uid, 		fid,  number , status)
-					values(	#oid#,#odate#,#user.uid#,#fruit.fid#,#number#,#status#)
+		insert into f_orders(oid,  odate,       uid, 		fid,  number , status , remark)
+					values(	#oid#,#odate#,#user.uid#,#fruit.fid#,#number#,#status#,#remark# )
 	</insert>
 	
 	<delete id="deleteById" parameterClass="String">
@@ -34,8 +35,8 @@
 		update f_orders set
 		fid = #fruit.fid#,
 		uid = #user.uid#,
-		number = #number#
-		
+		number = #number#,
+		remark = #remark#
 		<dynamic>
 			<isNotNull property="status">
 					,status = #status#    
@@ -48,8 +49,8 @@
 		update f_orders set
 		fid = #fruit.fid#,
 		uid = #user.uid#,
-		number = #number#
-		
+		number = #number#,
+		remark = #remark#
 		<dynamic>
 			<isNotNull property="status">
 					,status = #status#    
@@ -97,7 +98,15 @@
 		order by sortorder desc 
 		limit #lose#,#pageSize#
 	</select>
-	
+	<select id="getPage" parameterClass="HashMap"
+		resultClass="HashMap">
+		select * from 
+		`order` ord join `user` us on ord.uid=us.id
+		join book bo on ord.bid=bo.id
+		where us.id=#uid#
+		
+		order by  
+	</select>	
 
 </sqlMap>    
     

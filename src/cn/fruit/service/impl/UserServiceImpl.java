@@ -1,7 +1,7 @@
 package cn.fruit.service.impl;
 
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.Date;
 
 import util.CommonUtils;
 import util.SqlMapClientUtil;
@@ -57,12 +57,58 @@ public class UserServiceImpl implements UserService {
 			
 			session.commitTransaction();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			try {
 				session.endTransaction();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
+	}
+
+
+	@Override
+	public User login(User form) throws UserException {
+		User user = null;
+		try {
+			session.startTransaction();
+			
+			user = dao.getByNumber(form.getUnumber());
+			
+			session.commitTransaction();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			try {
+				session.endTransaction();
+			} catch (SQLException e1) {
+			
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
+
+	@Override
+	public void regist(User form) throws UserException {
+		form.setUid(CommonUtils.uuid());
+		form.setUdate(new Date());
+		try{
+			session.startTransaction();
+				
+			dao.add("User.insertUser", form);
+			
+			session.commitTransaction();
+		}catch(Exception e){
+			try {
+				session.endTransaction();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			throw new UserException(e);
+		}
+		
 	}
 	
 	

@@ -7,6 +7,8 @@
 
 	<include file="cn/fruit/action/fruit-struts.xml"></include>
 	<include file="cn/fruit/action/file-struts.xml"></include>
+	<include file="cn/fruit/action/user-struts.xml"></include>
+	<include file="cn/fruit/action/orders-struts.xml"></include>
 	
 	<!-- <include file="cn/fruit/action/struts-testAction.xml"></include> -->
 	

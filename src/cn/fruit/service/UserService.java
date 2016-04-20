@@ -12,7 +12,9 @@ public interface UserService {
 	
 	public void changePass(User form, String newPass) throws UserException;
 	
+	public User login(User form)throws UserException;
 	
+	public void regist(User form) throws UserException;
 	
 	
 }
